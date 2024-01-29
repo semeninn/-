@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Простой графический редактор</title>
+  <style>
+    #canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400"></canvas>
+  <script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var isDrawing = false;
+
+    canvas.addEventListener('mousedown', function(e) {
+      isDrawing = true;
+      ctx.beginPath();
+      ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+    });
+
+    canvas.addEventListener('mousemove', function(e) {
+      if (isDrawing) {
+        ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+        ctx.stroke();
+      }
+    });
+
+    canvas.addEventListener('mouseup', function() {
+      isDrawing = false;
+    });
+  </script>
+</body>
+</html>
